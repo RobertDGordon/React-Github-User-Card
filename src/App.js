@@ -11,7 +11,8 @@ class App extends React.Component {
   // }
 
   state = {
-    gitHubData: {}
+    gitHubData: {},
+    followers: []
   }
 
   componentDidMount() {
@@ -20,9 +21,27 @@ class App extends React.Component {
     .then (res => {
       // console.log(res);
       this.setState({gitHubData: res});
-      console.log(this.state.gitHubData)
+      // console.log(this.state.gitHubData)
     })
     .catch(err => {console.log(err)})
+
+    fetch(`http://api.github.com/users/RobertDGordon/followers`)
+    .then (res => res.json())
+    .then (res => {
+      // console.log(res);
+      res.forEach(item => {
+        fetch(item.url)
+        .then (res => res.json())
+        .then (res => {
+          // console.log (this.state.followers, 'follower forEach')
+          this.setState({followers: [...this.state.followers, res ]})
+        })
+        .catch(err => {console.log(err, 'forEach error')})
+      })
+      // this.setState({followers: res});
+      // console.log(this.state.followers)
+    })
+    .catch(err => {console.log(err, 'follower error')})
   }
 
   render() {
@@ -34,6 +53,11 @@ class App extends React.Component {
         <UserCard
           {...this.state.gitHubData}
         />
+        <div className='followers'>
+          {this.state.followers.map(user => (
+            <UserCard key={user.id} {...user} />
+          ))}
+        </div>
       </div>
     )
   }

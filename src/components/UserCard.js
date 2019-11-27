@@ -1,8 +1,9 @@
 import React from 'react'
 
 const UserCard = props => {
+    // console.log (props)
     return(
-        <div className='card'>
+        <div className='card' key={props.id}>
             <img width='200' src={props.avatar_url} alt={props.name} />
             <p>Name: {props.name}</p>
             <p><span>Location:</span>{props.location}</p>
