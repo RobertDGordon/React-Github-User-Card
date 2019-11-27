@@ -11,12 +11,13 @@ class App extends React.Component {
   // }
 
   state = {
+    currentUser: 'RobertDGordon',
     gitHubData: {},
     followers: []
   }
 
   componentDidMount() {
-    fetch('https://api.github.com/users/RobertDGordon')
+    fetch(`https://api.github.com/users/${this.state.currentUser}`)
     .then (res => res.json())
     .then (res => {
       // console.log(res);
@@ -25,7 +26,7 @@ class App extends React.Component {
     })
     .catch(err => {console.log(err)})
 
-    fetch(`http://api.github.com/users/RobertDGordon/followers`)
+    fetch(`http://api.github.com/users/${this.state.currentUser}/followers`)
     .then (res => res.json())
     .then (res => {
       res.forEach(item => {
@@ -51,6 +52,7 @@ class App extends React.Component {
           {...this.state.gitHubData}
         />
         <div className='followers'>
+          <h2>Followers:</h2>
           {this.state.followers.map(user => (
             <UserCard key={user.id} {...user} />
           ))}
