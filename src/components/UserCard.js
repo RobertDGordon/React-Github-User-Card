@@ -5,10 +5,10 @@ const UserCard = props => {
     return(
         <div className='card' key={props.id}>
             <img width='200' src={props.avatar_url} alt={props.name} />
-            <p>Name: {props.name}</p>
-            <p><span>Location:</span>{props.location}</p>
-            <p><span>Bio:</span>{props.bio}</p>
-            <p><span>Blog:</span>{props.blog}</p>
+            <p><span>Name:</span> {props.name}</p>
+            <p><span>Location: </span>{ props.location ? `${props.location}` : "unknown"}</p>
+            <p><span>Bio: </span>{ props.bio ? `${props.bio}` : 'N/A'}</p>
+            <p><span>Blog: </span>{ props.blog ? `${props.blog}` : 'N/A' }</p>
         </div>
     )
 }

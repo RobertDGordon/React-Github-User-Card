@@ -28,7 +28,6 @@ class App extends React.Component {
     fetch(`http://api.github.com/users/RobertDGordon/followers`)
     .then (res => res.json())
     .then (res => {
-      // console.log(res);
       res.forEach(item => {
         fetch(item.url)
         .then (res => res.json())
@@ -38,8 +37,6 @@ class App extends React.Component {
         })
         .catch(err => {console.log(err, 'forEach error')})
       })
-      // this.setState({followers: res});
-      // console.log(this.state.followers)
     })
     .catch(err => {console.log(err, 'follower error')})
   }
