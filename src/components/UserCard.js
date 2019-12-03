@@ -1,10 +1,11 @@
 import React from 'react'
 import styled, {keyframes} from 'styled-components'
-import { flipInY, flip, tada } from 'react-animations';
+import { flipInY, flip, tada, bounceIn } from 'react-animations';
 
 const tadaAnim = keyframes`${tada}`
 const flipYAnim = keyframes `${flipInY}`
 const flipAnim = keyframes `${flip}`
+const bounceAnim = keyframes `${bounceIn}`
 
 const Card = styled.div `
     animation: 1s ${flipYAnim};
@@ -19,8 +20,12 @@ const Card = styled.div `
     box-shadow: 0 9px 18px rgba(0, 0, 0, 0.3), 0 5px 12px rgba(0, 0, 0, 0.22);
     transition: transform 300ms ease-in-out;
     &:hover{
-        transform: scale(1.2);
-        animation: 0.5s ${tadaAnim};
+        /* transform: scale(1.2); */
+        animation: 0.5s ${bounceAnim};
+        background-color: #98a4b8;
+        .data p span{
+            color: #b9d1fa;
+        }
     }
     .pic{
         width: 175px;
