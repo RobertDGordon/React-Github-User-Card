@@ -1,14 +1,27 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
+import { flipInY, flip, tada } from 'react-animations';
+
+const tadaAnim = keyframes`${tada}`
+const flipYAnim = keyframes `${flipInY}`
+const flipAnim = keyframes `${flip}`
 
 const Card = styled.div `
+    animation: 1s ${flipYAnim};
     display: flex;
-    width: 400px;
-    height: 200px;
+    width: 395px;
+    height: 195px;
+    padding-top: 5px;
     justify-content: center;
     align-items: center;
-    margin: 20px;
-    background-color: lightgrey;
+    margin: 15px;
+    background-color: #707070;
+    box-shadow: 0 9px 18px rgba(0, 0, 0, 0.3), 0 5px 12px rgba(0, 0, 0, 0.22);
+    transition: transform 300ms ease-in-out;
+    &:hover{
+        transform: scale(1.2);
+        animation: 0.5s ${tadaAnim};
+    }
     .pic{
         width: 175px;
         img{
@@ -26,6 +39,10 @@ const Card = styled.div `
         p{
             margin-bottom: 1px;
             margin-left: 5px;
+            span{
+                font-weight: bold;
+                color: #8cb6df;
+            }
         }
     }
 `

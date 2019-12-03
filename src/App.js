@@ -4,6 +4,7 @@ import SearchFrom from './components/SearchForm';
 import './App.css';
 import styled from 'styled-components'
 
+
 const Searchbar = styled.div`
   /* display: flex; */
   margin: 50px;
@@ -23,7 +24,11 @@ const Searchbar = styled.div`
   }
 `
 
-const User = styled.div`
+const Follower = styled.div`
+  display: flex;
+  width: 1275px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 
 `
 
@@ -112,7 +117,7 @@ class App extends React.Component {
     return (
       <div className='App'>
         <header>
-          <h1>The Git Hub Repository</h1>
+          <h1>Git'r done</h1>
           <Searchbar>
             <SearchFrom searchUser={this.searchUser} />
           </Searchbar>
@@ -120,12 +125,12 @@ class App extends React.Component {
         <UserCard
           {...this.state.gitHubData}
         />
-        <div className='followers'>
-          <h2>Followers:</h2>
+        <h2>Followers:</h2>
+        <Follower>
           {this.state.followers.map(user => (
             <UserCard key={user.id} {...user} />
           ))}
-        </div>
+        </Follower>
       </div>
     )
   }
