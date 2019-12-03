@@ -2,6 +2,30 @@ import React from 'react';
 import UserCard from './components/UserCard';
 import SearchFrom from './components/SearchForm';
 import './App.css';
+import styled from 'styled-components'
+
+const Searchbar = styled.div`
+  /* display: flex; */
+  margin: 50px;
+  /* width: 800px; */
+  /* border: 1px solid red; */
+  input{
+    width: 300px;
+  }
+  button{
+    margin-left: 10px;
+    color: white;
+    background-color: darkblue;
+    border: 1px solid blue;
+    &:hover{
+      background-color: grey;
+    }
+  }
+`
+
+const User = styled.div`
+
+`
 
 class App extends React.Component {
   // constructor(){
@@ -63,21 +87,21 @@ class App extends React.Component {
         .then (res => {
           this.setState({gitHubData: res});
           //Clear followers list, and then fetch new data
-          // this.setState({followers: []})
-          // fetch(`http://api.github.com/users/${this.state.currentUser}/followers`)
-          //   .then (res => res.json())
-          //   .then (res => {
-          //     res.forEach(item => {
-          //       fetch(item.url)
-          //       .then (res => res.json())
-          //       .then (res => {
-          //         // console.log (this.state.followers, 'follower forEach')
-          //         this.setState({followers: [...this.state.followers, res ]})
-          //       })
-          //     .catch(err => {console.log(err, 'forEach error')})
-          //   })
-          // })
-          // .catch(err => {console.log(err, 'follower error')})
+          this.setState({followers: []})
+          fetch(`http://api.github.com/users/${this.state.currentUser}/followers`)
+            .then (res => res.json())
+            .then (res => {
+              res.forEach(item => {
+                fetch(item.url)
+                .then (res => res.json())
+                .then (res => {
+                  // console.log (this.state.followers, 'follower forEach')
+                  this.setState({followers: [...this.state.followers, res ]})
+                })
+              .catch(err => {console.log(err, 'forEach error')})
+            })
+          })
+          .catch(err => {console.log(err, 'follower error')})
           //end fetching new followers
         })
         .catch(err => {console.log(err)})
@@ -86,10 +110,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='App'>
         <header>
-          <h1>GitHub</h1>
-          <SearchFrom searchUser={this.searchUser} />
+          <h1>The Git Hub Repository</h1>
+          <Searchbar>
+            <SearchFrom searchUser={this.searchUser} />
+          </Searchbar>
         </header>
         <UserCard
           {...this.state.gitHubData}

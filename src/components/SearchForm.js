@@ -30,6 +30,7 @@ class SearchFrom extends React.Component{
                     onChange={this.handleChanges}
                     type='text'
                     name='User'
+                    placeholder='Search for a GitHub User...'
                     value={this.state.userName}
                 />
                 <button>Git!</button>
